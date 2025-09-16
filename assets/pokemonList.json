@@ -1,0 +1,606 @@
+[
+  {
+    "file": "ABRA.png",
+    "name": "ABRA"
+  },
+  {
+    "file": "AERODACTYL.png",
+    "name": "AERODACTYL"
+  },
+  {
+    "file": "ALAKAZAM.png",
+    "name": "ALAKAZAM"
+  },
+  {
+    "file": "ARBOK.png",
+    "name": "ARBOK"
+  },
+  {
+    "file": "ARCANINE.png",
+    "name": "ARCANINE"
+  },
+  {
+    "file": "ARTICUNO.png",
+    "name": "ARTICUNO"
+  },
+  {
+    "file": "BEEDRILL.png",
+    "name": "BEEDRILL"
+  },
+  {
+    "file": "BELLSPROUT.png",
+    "name": "BELLSPROUT"
+  },
+  {
+    "file": "BLASTOISE.png",
+    "name": "BLASTOISE"
+  },
+  {
+    "file": "BULBASAUR.png",
+    "name": "BULBASAUR"
+  },
+  {
+    "file": "BUTTERFREE.png",
+    "name": "BUTTERFREE"
+  },
+  {
+    "file": "CATERPIE.png",
+    "name": "CATERPIE"
+  },
+  {
+    "file": "CHANSEY.png",
+    "name": "CHANSEY"
+  },
+  {
+    "file": "CHARIZARD.png",
+    "name": "CHARIZARD"
+  },
+  {
+    "file": "CHARMANDER.png",
+    "name": "CHARMANDER"
+  },
+  {
+    "file": "CHARMELEON.png",
+    "name": "CHARMELEON"
+  },
+  {
+    "file": "CLEFABLE.png",
+    "name": "CLEFABLE"
+  },
+  {
+    "file": "CLEFAIRY.png",
+    "name": "CLEFAIRY"
+  },
+  {
+    "file": "CLOYSTER.png",
+    "name": "CLOYSTER"
+  },
+  {
+    "file": "CUBONE.png",
+    "name": "CUBONE"
+  },
+  {
+    "file": "DEWGONG.png",
+    "name": "DEWGONG"
+  },
+  {
+    "file": "DIGLETT.png",
+    "name": "DIGLETT"
+  },
+  {
+    "file": "DITTO.png",
+    "name": "DITTO"
+  },
+  {
+    "file": "DODRIO.png",
+    "name": "DODRIO"
+  },
+  {
+    "file": "DODUO.png",
+    "name": "DODUO"
+  },
+  {
+    "file": "DRAGONAIR.png",
+    "name": "DRAGONAIR"
+  },
+  {
+    "file": "DRAGONITE.png",
+    "name": "DRAGONITE"
+  },
+  {
+    "file": "DRATINI.png",
+    "name": "DRATINI"
+  },
+  {
+    "file": "DROWZEE.png",
+    "name": "DROWZEE"
+  },
+  {
+    "file": "DUGTRIO.png",
+    "name": "DUGTRIO"
+  },
+  {
+    "file": "EEVEE.png",
+    "name": "EEVEE"
+  },
+  {
+    "file": "EKANS.png",
+    "name": "EKANS"
+  },
+  {
+    "file": "ELECTABUZZ.png",
+    "name": "ELECTABUZZ"
+  },
+  {
+    "file": "ELECTRODE.png",
+    "name": "ELECTRODE"
+  },
+  {
+    "file": "EXEGGCUTE.png",
+    "name": "EXEGGCUTE"
+  },
+  {
+    "file": "EXEGGUTOR.png",
+    "name": "EXEGGUTOR"
+  },
+  {
+    "file": "FARFETCHD.png",
+    "name": "FARFETCHD"
+  },
+  {
+    "file": "FEAROW.png",
+    "name": "FEAROW"
+  },
+  {
+    "file": "FLAREON.png",
+    "name": "FLAREON"
+  },
+  {
+    "file": "GASTLY.png",
+    "name": "GASTLY"
+  },
+  {
+    "file": "GENGAR.png",
+    "name": "GENGAR"
+  },
+  {
+    "file": "GEODUDE.png",
+    "name": "GEODUDE"
+  },
+  {
+    "file": "GLOOM.png",
+    "name": "GLOOM"
+  },
+  {
+    "file": "GOLBAT.png",
+    "name": "GOLBAT"
+  },
+  {
+    "file": "GOLDEEN.png",
+    "name": "GOLDEEN"
+  },
+  {
+    "file": "GOLDUCK.png",
+    "name": "GOLDUCK"
+  },
+  {
+    "file": "GOLEM.png",
+    "name": "GOLEM"
+  },
+  {
+    "file": "GRAVELER.png",
+    "name": "GRAVELER"
+  },
+  {
+    "file": "GRIMER.png",
+    "name": "GRIMER"
+  },
+  {
+    "file": "GROWLITHE.png",
+    "name": "GROWLITHE"
+  },
+  {
+    "file": "GYARADOS.png",
+    "name": "GYARADOS"
+  },
+  {
+    "file": "HAUNTER.png",
+    "name": "HAUNTER"
+  },
+  {
+    "file": "HITMONCHAN.png",
+    "name": "HITMONCHAN"
+  },
+  {
+    "file": "HITMONLEE.png",
+    "name": "HITMONLEE"
+  },
+  {
+    "file": "HORSEA.png",
+    "name": "HORSEA"
+  },
+  {
+    "file": "HYPNO.png",
+    "name": "HYPNO"
+  },
+  {
+    "file": "IVYSAUR.png",
+    "name": "IVYSAUR"
+  },
+  {
+    "file": "JIGGLYPUFF.png",
+    "name": "JIGGLYPUFF"
+  },
+  {
+    "file": "JOLTEON.png",
+    "name": "JOLTEON"
+  },
+  {
+    "file": "JYNX.png",
+    "name": "JYNX"
+  },
+  {
+    "file": "KABUTO.png",
+    "name": "KABUTO"
+  },
+  {
+    "file": "KABUTOPS.png",
+    "name": "KABUTOPS"
+  },
+  {
+    "file": "KADABRA.png",
+    "name": "KADABRA"
+  },
+  {
+    "file": "KAKUNA.png",
+    "name": "KAKUNA"
+  },
+  {
+    "file": "KANGASKHAN.png",
+    "name": "KANGASKHAN"
+  },
+  {
+    "file": "KINGLER.png",
+    "name": "KINGLER"
+  },
+  {
+    "file": "KOFFING.png",
+    "name": "KOFFING"
+  },
+  {
+    "file": "KRABBY.png",
+    "name": "KRABBY"
+  },
+  {
+    "file": "LAPRAS.png",
+    "name": "LAPRAS"
+  },
+  {
+    "file": "LICKITUNG.png",
+    "name": "LICKITUNG"
+  },
+  {
+    "file": "MACHAMP.png",
+    "name": "MACHAMP"
+  },
+  {
+    "file": "MACHOKE.png",
+    "name": "MACHOKE"
+  },
+  {
+    "file": "MACHOP.png",
+    "name": "MACHOP"
+  },
+  {
+    "file": "MAGIKARP.png",
+    "name": "MAGIKARP"
+  },
+  {
+    "file": "MAGMAR.png",
+    "name": "MAGMAR"
+  },
+  {
+    "file": "MAGNEMITE.png",
+    "name": "MAGNEMITE"
+  },
+  {
+    "file": "MAGNETON.png",
+    "name": "MAGNETON"
+  },
+  {
+    "file": "MANKEY.png",
+    "name": "MANKEY"
+  },
+  {
+    "file": "MAROWAK.png",
+    "name": "MAROWAK"
+  },
+  {
+    "file": "MEOWTH.png",
+    "name": "MEOWTH"
+  },
+  {
+    "file": "METAPOD.png",
+    "name": "METAPOD"
+  },
+  {
+    "file": "MEW.png",
+    "name": "MEW"
+  },
+  {
+    "file": "MEWTWO.png",
+    "name": "MEWTWO"
+  },
+  {
+    "file": "MOLTRES.png",
+    "name": "MOLTRES"
+  },
+  {
+    "file": "MR_MIME.png",
+    "name": "MR.MIME"
+  },
+  {
+    "file": "MUK.png",
+    "name": "MUK"
+  },
+  {
+    "file": "NIDOKING.png",
+    "name": "NIDOKING"
+  },
+  {
+    "file": "NIDOQUEEN.png",
+    "name": "NIDOQUEEN"
+  },
+  {
+    "file": "NIDORAN_F.png",
+    "name": "NIDORAN ♀"
+  },
+  {
+    "file": "NIDORAN_M.png",
+    "name": "NIDORAN ♂"
+  },
+  {
+    "file": "NIDORINA.png",
+    "name": "NIDORINA"
+  },
+  {
+    "file": "NIDORINO.png",
+    "name": "NIDORINO"
+  },
+  {
+    "file": "NINETALES.png",
+    "name": "NINETALES"
+  },
+  {
+    "file": "ODDISH.png",
+    "name": "ODDISH"
+  },
+  {
+    "file": "OMANYTE.png",
+    "name": "OMANYTE"
+  },
+  {
+    "file": "OMASTAR.png",
+    "name": "OMASTAR"
+  },
+  {
+    "file": "ONIX.png",
+    "name": "ONIX"
+  },
+  {
+    "file": "PARAS.png",
+    "name": "PARAS"
+  },
+  {
+    "file": "PARASECT.png",
+    "name": "PARASECT"
+  },
+  {
+    "file": "PERSIAN.png",
+    "name": "PERSIAN"
+  },
+  {
+    "file": "PIDGEOT.png",
+    "name": "PIDGEOT"
+  },
+  {
+    "file": "PIDGEOTTO.png",
+    "name": "PIDGEOTTO"
+  },
+  {
+    "file": "PIDGEY.png",
+    "name": "PIDGEY"
+  },
+  {
+    "file": "PIKACHU.png",
+    "name": "PIKACHU"
+  },
+  {
+    "file": "PINSIR.png",
+    "name": "PINSIR"
+  },
+  {
+    "file": "POLIWAG.png",
+    "name": "POLIWAG"
+  },
+  {
+    "file": "POLIWHIRL.png",
+    "name": "POLIWHIRL"
+  },
+  {
+    "file": "POLIWRATH.png",
+    "name": "POLIWRATH"
+  },
+  {
+    "file": "PONYTA.png",
+    "name": "PONYTA"
+  },
+  {
+    "file": "PORYGON.png",
+    "name": "PORYGON"
+  },
+  {
+    "file": "PRIMEAPE.png",
+    "name": "PRIMEAPE"
+  },
+  {
+    "file": "PSYDUCK.png",
+    "name": "PSYDUCK"
+  },
+  {
+    "file": "RAICHU.png",
+    "name": "RAICHU"
+  },
+  {
+    "file": "RAPIDASH.png",
+    "name": "RAPIDASH"
+  },
+  {
+    "file": "RATICATE.png",
+    "name": "RATICATE"
+  },
+  {
+    "file": "RATTATA.png",
+    "name": "RATTATA"
+  },
+  {
+    "file": "RHYDON.png",
+    "name": "RHYDON"
+  },
+  {
+    "file": "RHYHORN.png",
+    "name": "RHYHORN"
+  },
+  {
+    "file": "SANDSHREW.png",
+    "name": "SANDSHREW"
+  },
+  {
+    "file": "SANDSLASH.png",
+    "name": "SANDSLASH"
+  },
+  {
+    "file": "SCYTHER.png",
+    "name": "SCYTHER"
+  },
+  {
+    "file": "SEADRA.png",
+    "name": "SEADRA"
+  },
+  {
+    "file": "SEAKING.png",
+    "name": "SEAKING"
+  },
+  {
+    "file": "SEEL.png",
+    "name": "SEEL"
+  },
+  {
+    "file": "SHELLDER.png",
+    "name": "SHELLDER"
+  },
+  {
+    "file": "SLOWBRO.png",
+    "name": "SLOWBRO"
+  },
+  {
+    "file": "SLOWPOKE.png",
+    "name": "SLOWPOKE"
+  },
+  {
+    "file": "SNORLAX.png",
+    "name": "SNORLAX"
+  },
+  {
+    "file": "SPEAROW.png",
+    "name": "SPEAROW"
+  },
+  {
+    "file": "SQUIRTLE.png",
+    "name": "SQUIRTLE"
+  },
+  {
+    "file": "STARMIE.png",
+    "name": "STARMIE"
+  },
+  {
+    "file": "STARYU.png",
+    "name": "STARYU"
+  },
+  {
+    "file": "TANGELA.png",
+    "name": "TANGELA"
+  },
+  {
+    "file": "TAUROS.png",
+    "name": "TAUROS"
+  },
+  {
+    "file": "TENTACOOL.png",
+    "name": "TENTACOOL"
+  },
+  {
+    "file": "TENTACRUEL.png",
+    "name": "TENTACRUEL"
+  },
+  {
+    "file": "VAPOREON.png",
+    "name": "VAPOREON"
+  },
+  {
+    "file": "VENOMOTH.png",
+    "name": "VENOMOTH"
+  },
+  {
+    "file": "VENONAT.png",
+    "name": "VENONAT"
+  },
+  {
+    "file": "VENUSAUR.png",
+    "name": "VENUSAUR"
+  },
+  {
+    "file": "VICTREEBEL.png",
+    "name": "VICTREEBEL"
+  },
+  {
+    "file": "VILEPLUME.png",
+    "name": "VILEPLUME"
+  },
+  {
+    "file": "VOLTORB.png",
+    "name": "VOLTORB"
+  },
+  {
+    "file": "VULPIX.png",
+    "name": "VULPIX"
+  },
+  {
+    "file": "WARTORTLE.png",
+    "name": "WARTORTLE"
+  },
+  {
+    "file": "WEEDLE.png",
+    "name": "WEEDLE"
+  },
+  {
+    "file": "WEEPINBELL.png",
+    "name": "WEEPINBELL"
+  },
+  {
+    "file": "WEEZING.png",
+    "name": "WEEZING"
+  },
+  {
+    "file": "WIGGLYTUFF.png",
+    "name": "WIGGLYTUFF"
+  },
+  {
+    "file": "ZAPDOS.png",
+    "name": "ZAPDOS"
+  },
+  {
+    "file": "ZUBAT.png",
+    "name": "ZUBAT"
+  }
+]
