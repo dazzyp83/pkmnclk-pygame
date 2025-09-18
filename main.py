@@ -100,6 +100,15 @@ def clamp(val, lo, hi):
 # -------------------- App --------------------
 
 class App:
+    def force_battle_turn_safe(self):
+        # Add guards for assets/state as needed
+        if self.front_img_raw is None or self.back_img_raw is None:
+            print("Sprites not ready (front/back).")
+            return
+        # Add any other guards for your state here
+
+        # Now call your normal battle animation logic
+        self.start_battle_animation()
     def __init__(self):
         # Animation state
         self.animating = False
@@ -183,6 +192,8 @@ class App:
             return pygame.transform.smoothscale(self.back_img_raw, (int(w), int(h)))
 
     def draw_sprite_card(self, which, rect=None, draw_name=True, draw_hp=True):
+        if not pygame.display.get_init() or self.screen is None:
+            return
         if which == "front":
             if not self.front_img_raw:
                 return
@@ -200,99 +211,114 @@ class App:
             self.screen.blit(sprite, (0, 0))
 
     def run(self):
-        running = True
-        while running:
-            dt = self.clock.tick(FPS)
+        clock = pygame.time.Clock()
+        self.running = True
+        while self.running:
+            # 1) Handle events FIRST
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    running = False
+                    self.running = False
+                    break
                 elif event.type == pygame.KEYDOWN:
-                    if not self.animating and event.key == pygame.K_m:
-                        # Force a battle turn with animation
-                        self.start_battle_animation()
-            # Immediately break if running is False, before any drawing or logic
-            if not running:
+                    if event.key == pygame.K_m:
+                        try:
+                            self.force_battle_turn_safe()
+                        except Exception:
+                            import traceback
+                            traceback.print_exc()
+                elif event.type == pygame.VIDEORESIZE:
+                    self.screen = pygame.display.set_mode((event.w, event.h), pygame.RESIZABLE)
+
+            # 2) If the window was closed during events, bail out ASAP
+            if not self.running or not pygame.display.get_init():
                 break
 
-            # Battle logic: every 5 minutes, a random Pokémon loses HP (with animation)
-            now = time.time()
-            if not self.animating and now >= self.next_battle:
-                self.start_battle_animation()
+            # 3) Draw only with a live display surface
+            try:
+                # Battle logic: every 5 minutes, a random Pokémon loses HP (with animation)
+                now = time.time()
+                if not self.animating and now >= self.next_battle:
+                    self.start_battle_animation()
 
-            # Animation state machine
-            if self.animating:
-                self.update_battle_animation()
+                # Animation state machine
+                if self.animating:
+                    self.update_battle_animation()
 
-            # Always draw the current state (animation or not)
-            self.draw_bg()
-            self.draw_time(rect=(*TIME_POS, *TIME_SIZE))
-            front_rect = (*FRONT_SPRITE_POS, *FRONT_SPRITE_SIZE)
-            back_rect = (*BACK_SPRITE_POS, *BACK_SPRITE_SIZE)
-            if self.animating and self.anim_phase == 'move':
-                t = (time.time() - self.anim_start_time) / self.anim_duration
-                t = min(max(t, 0), 1)
-                if t < 0.5:
-                    progress = t / 0.5
-                else:
-                    progress = 1 - (t - 0.5) / 0.5
-                if self.anim_attacker == 'front':
-                    x0, y0, w, h = front_rect
-                    x1, y1 = WINDOW_WIDTH//2 - w//2, WINDOW_HEIGHT//2 - h//2
-                    x = int(x0 + (x1 - x0) * progress)
-                    y = int(y0 + (y1 - y0) * progress)
-                    self.draw_sprite_card('front', rect=(x, y, w, h), draw_name=False, draw_hp=False)
-                    self.draw_sprite_card('back', rect=back_rect, draw_name=False, draw_hp=False)
-                else:
-                    x0, y0, w, h = back_rect
-                    x1, y1 = WINDOW_WIDTH//2 - w//2, WINDOW_HEIGHT//2 - h//2
-                    x = int(x0 + (x1 - x0) * progress)
-                    y = int(y0 + (y1 - y0) * progress)
-                    self.draw_sprite_card('back', rect=(x, y, w, h), draw_name=False, draw_hp=False)
-                    self.draw_sprite_card('front', rect=front_rect, draw_name=False, draw_hp=False)
-            elif self.animating and self.anim_phase == 'flash':
-                if self.anim_defender == 'front':
-                    if self.anim_flash_on:
-                        self.draw_sprite_card('front', rect=front_rect, draw_name=False, draw_hp=False)
-                    self.draw_sprite_card('back', rect=back_rect, draw_name=False, draw_hp=False)
-                else:
-                    self.draw_sprite_card('front', rect=front_rect, draw_name=False, draw_hp=False)
-                    if self.anim_flash_on:
+                # Always draw the current state (animation or not)
+                self.draw_bg()
+                self.draw_time(rect=(*TIME_POS, *TIME_SIZE))
+                front_rect = (*FRONT_SPRITE_POS, *FRONT_SPRITE_SIZE)
+                back_rect = (*BACK_SPRITE_POS, *BACK_SPRITE_SIZE)
+                if self.animating and self.anim_phase == 'move':
+                    t = (time.time() - self.anim_start_time) / self.anim_duration
+                    t = min(max(t, 0), 1)
+                    if t < 0.5:
+                        progress = t / 0.5
+                    else:
+                        progress = 1 - (t - 0.5) / 0.5
+                    if self.anim_attacker == 'front':
+                        x0, y0, w, h = front_rect
+                        x1, y1 = WINDOW_WIDTH//2 - w//2, WINDOW_HEIGHT//2 - h//2
+                        x = int(x0 + (x1 - x0) * progress)
+                        y = int(y0 + (y1 - y0) * progress)
+                        self.draw_sprite_card('front', rect=(x, y, w, h), draw_name=False, draw_hp=False)
                         self.draw_sprite_card('back', rect=back_rect, draw_name=False, draw_hp=False)
-            else:
-                self.draw_sprite_card("front", rect=front_rect, draw_name=False, draw_hp=False)
-                self.draw_sprite_card("back", rect=back_rect, draw_name=False, draw_hp=False)
-            # Draw front name
-            name = name_from_path(self.curr_front_path).lower()
-            dex = self.dex_map.get(name)
-            label = name.capitalize()
-            if dex is not None:
-                label = f"{label}  No.{dex}"
-            text_surf = self.font.render(label, True, (0, 0, 0))
-            x, y = FRONT_NAME_POS
-            w, h = FRONT_NAME_SIZE
-            text_surf = pygame.transform.smoothscale(text_surf, (int(w), int(h)))
-            self.screen.blit(text_surf, (x, y))
-            # Draw back name
-            name = name_from_path(self.curr_back_path).lower()
-            dex = self.dex_map.get(name)
-            label = name.capitalize()
-            if dex is not None:
-                label = f"{label}  No.{dex}"
-            text_surf = self.font.render(label, True, (0, 0, 0))
-            x, y = BACK_NAME_POS
-            w, h = BACK_NAME_SIZE
-            text_surf = pygame.transform.smoothscale(text_surf, (int(w), int(h)))
-            self.screen.blit(text_surf, (x, y))
-            # Draw front HP bar
-            x, y = FRONT_HP_BAR_POS
-            w, h = FRONT_HP_BAR_SIZE
-            draw_hp_bar(self.screen, x, y, value=self.front_hp, width=w, height=h)
-            # Draw back HP bar
-            x, y = BACK_HP_BAR_POS
-            w, h = BACK_HP_BAR_SIZE
-            draw_hp_bar(self.screen, x, y, value=self.back_hp, width=w, height=h)
-            pygame.display.flip()
-        return
+                    else:
+                        x0, y0, w, h = back_rect
+                        x1, y1 = WINDOW_WIDTH//2 - w//2, WINDOW_HEIGHT//2 - h//2
+                        x = int(x0 + (x1 - x0) * progress)
+                        y = int(y0 + (y1 - y0) * progress)
+                        self.draw_sprite_card('back', rect=(x, y, w, h), draw_name=False, draw_hp=False)
+                        self.draw_sprite_card('front', rect=front_rect, draw_name=False, draw_hp=False)
+                elif self.animating and self.anim_phase == 'flash':
+                    if self.anim_defender == 'front':
+                        if self.anim_flash_on:
+                            self.draw_sprite_card('front', rect=front_rect, draw_name=False, draw_hp=False)
+                        self.draw_sprite_card('back', rect=back_rect, draw_name=False, draw_hp=False)
+                    else:
+                        self.draw_sprite_card('front', rect=front_rect, draw_name=False, draw_hp=False)
+                        if self.anim_flash_on:
+                            self.draw_sprite_card('back', rect=back_rect, draw_name=False, draw_hp=False)
+                else:
+                    self.draw_sprite_card("front", rect=front_rect, draw_name=False, draw_hp=False)
+                    self.draw_sprite_card("back", rect=back_rect, draw_name=False, draw_hp=False)
+                # Draw front name
+                name = name_from_path(self.curr_front_path).lower()
+                dex = self.dex_map.get(name)
+                label = name.capitalize()
+                if dex is not None:
+                    label = f"{label}  No.{dex}"
+                text_surf = self.font.render(label, True, (0, 0, 0))
+                x, y = FRONT_NAME_POS
+                w, h = FRONT_NAME_SIZE
+                text_surf = pygame.transform.smoothscale(text_surf, (int(w), int(h)))
+                self.screen.blit(text_surf, (x, y))
+                # Draw back name
+                name = name_from_path(self.curr_back_path).lower()
+                dex = self.dex_map.get(name)
+                label = name.capitalize()
+                if dex is not None:
+                    label = f"{label}  No.{dex}"
+                text_surf = self.font.render(label, True, (0, 0, 0))
+                x, y = BACK_NAME_POS
+                w, h = BACK_NAME_SIZE
+                text_surf = pygame.transform.smoothscale(text_surf, (int(w), int(h)))
+                self.screen.blit(text_surf, (x, y))
+                # Draw front HP bar
+                x, y = FRONT_HP_BAR_POS
+                w, h = FRONT_HP_BAR_SIZE
+                draw_hp_bar(self.screen, x, y, value=self.front_hp, width=w, height=h)
+                # Draw back HP bar
+                x, y = BACK_HP_BAR_POS
+                w, h = BACK_HP_BAR_SIZE
+                draw_hp_bar(self.screen, x, y, value=self.back_hp, width=w, height=h)
+                pygame.display.flip()
+            except Exception as e:
+                import traceback
+                traceback.print_exc()
+                break
+            clock.tick(60)
+        pygame.quit()
         return
     def start_battle_animation(self):
         # Randomly pick attacker/defender
@@ -424,6 +450,8 @@ class App:
         pygame.quit()
 
     def draw_time(self, rect=None):
+        if not pygame.display.get_init() or self.screen is None:
+            return
         now_str = time.strftime("%H:%M")
         surf = self.time_font.render(now_str, True, (0, 0, 0))  # black text
         if rect:
@@ -435,6 +463,8 @@ class App:
             self.screen.blit(surf, rect)
 
     def draw_bg(self):
+        if not pygame.display.get_init() or self.screen is None:
+            return
         if self.bg:
             bg_scaled = pygame.transform.smoothscale(self.bg, (WINDOW_WIDTH, WINDOW_HEIGHT))
             self.screen.blit(bg_scaled, (0, 0))
