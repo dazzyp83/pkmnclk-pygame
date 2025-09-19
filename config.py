@@ -2,7 +2,7 @@ WINDOW_WIDTH = 320
 WINDOW_HEIGHT = 240
 WINDOW_TITLE = "Pokémon Clock — Pygame"
 
-FPS = 30
+FPS = 20
 SWAP_SECONDS = 30  # how often to change Pokémon automatically
 
 # Where assets live (relative to project root)
