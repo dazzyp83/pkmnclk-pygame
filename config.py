@@ -13,7 +13,7 @@ BG_IMAGE = f"{ASSETS_DIR}/bgd.png"
 
 FONT_PATH = f"{ASSETS_DIR}/pkmn.ttf"  # make sure filename matches
 FONT_SIZE = 16
-TIME_FONT_SIZE = 24
+TIME_FONT_SIZE = 48
 
 # Sprite sizing & placement
 SPRITE_SIZE = 96  # scale PNGs to this square size
