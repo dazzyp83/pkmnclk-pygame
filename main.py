@@ -136,8 +136,11 @@ class App:
         self.front_name = self.back_name = ""
         self.front_name_surf = None
         self.back_name_surf = None
+        self.last_front_name = None
+        self.last_back_name = None
         self.time_str = ""
         self.time_surf = None
+        self.announcement_cache = {}  # msg -> surface list
         self.front_hp = self.back_hp = 1.0
         self.front_anim = MonAnim(*FRONT_SPRITE_POS, *FRONT_SPRITE_SIZE, axis='y', direction=-1)
         self.back_anim = MonAnim(*BACK_SPRITE_POS, *BACK_SPRITE_SIZE, axis='x', direction=-1)
@@ -219,21 +222,29 @@ class App:
     def draw_names(self):
         # Front name: anchor from left (first letter), vertically centered
         if self.front_name:
-            txt = self.font.render(self.front_name, True, (0,0,0))
-            surf_w, surf_h = txt.get_size()
-            box_x, box_y = FRONT_NAME_POS
-            box_w, box_h = FRONT_NAME_SIZE
-            draw_x = box_x  # left edge of box
-            draw_y = box_y + (box_h - surf_h)//2
-            self.sc.blit(txt, (draw_x, draw_y))
+            if self.front_name != self.last_front_name:
+                txt = self.font.render(self.front_name, True, (0,0,0))
+                self.front_name_surf = txt
+                self.last_front_name = self.front_name
+            if self.front_name_surf:
+                surf_w, surf_h = self.front_name_surf.get_size()
+                box_x, box_y = FRONT_NAME_POS
+                box_w, box_h = FRONT_NAME_SIZE
+                draw_x = box_x  # left edge of box
+                draw_y = box_y + (box_h - surf_h)//2
+                self.sc.blit(self.front_name_surf, (draw_x, draw_y))
         if self.back_name:
-            txt = self.font.render(self.back_name, True, (0,0,0))
-            surf_w, surf_h = txt.get_size()
-            box_x, box_y = BACK_NAME_POS
-            box_w, box_h = BACK_NAME_SIZE
-            draw_x = box_x + box_w - surf_w  # right edge of box
-            draw_y = box_y + (box_h - surf_h)//2
-            self.sc.blit(txt, (draw_x, draw_y))
+            if self.back_name != self.last_back_name:
+                txt = self.font.render(self.back_name, True, (0,0,0))
+                self.back_name_surf = txt
+                self.last_back_name = self.back_name
+            if self.back_name_surf:
+                surf_w, surf_h = self.back_name_surf.get_size()
+                box_x, box_y = BACK_NAME_POS
+                box_w, box_h = BACK_NAME_SIZE
+                draw_x = box_x + box_w - surf_w  # right edge of box
+                draw_y = box_y + (box_h - surf_h)//2
+                self.sc.blit(self.back_name_surf, (draw_x, draw_y))
 
     def draw_time(self, dt=0):
         # Message queue logic: show queued messages, else show clock
@@ -248,7 +259,7 @@ class App:
             tx, ty = TIME_POS
             tw, th = TIME_SIZE
             pygame.draw.rect(self.sc, (255,255,255), (tx, ty, tw, th))
-            # Word wrap message to two lines if needed
+            # Word wrap message to up to three lines if needed
             def wrap_text(text, font, max_width, max_lines=3):
                 words = text.split()
                 lines = []
@@ -267,18 +278,24 @@ class App:
                     # Force only max_lines, join overflow into last line
                     lines = lines[:max_lines-1] + [" ".join(lines[max_lines-1:])]
                 return lines
-            lines = wrap_text(msg, self.font, tw - 12, max_lines=3)
-            total_height = sum(self.font.size(line)[1] for line in lines)
-            # Move text up by reducing the offset (from +10 to +3)
-            y = ty + (th - total_height)//2 + 3
-            # Determine if this is the last announcement in the queue (after popping)
+            # Cache announcement surfaces by message and color
             is_last_announcement = not self.message_queue and self.current_message[1] > 0
-            for line in lines:
-                color = (255,0,0) if is_last_announcement else (0,0,0)
-                txt = self.font.render(line, True, color)
-                surf_w, surf_h = txt.get_size()
+            color = (255,0,0) if is_last_announcement else (0,0,0)
+            cache_key = (msg, color)
+            if cache_key not in self.announcement_cache:
+                lines = wrap_text(msg, self.font, tw - 12, max_lines=3)
+                surfaces = []
+                for line in lines:
+                    txt = self.font.render(line, True, color)
+                    surfaces.append(txt)
+                self.announcement_cache[cache_key] = surfaces
+            lines = self.announcement_cache[cache_key]
+            total_height = sum(surf.get_size()[1] for surf in lines)
+            y = ty + (th - total_height)//2 + 3
+            for surf in lines:
+                surf_w, surf_h = surf.get_size()
                 draw_x = tx + (tw - surf_w)//2
-                self.sc.blit(txt, (draw_x, y))
+                self.sc.blit(surf, (draw_x, y))
                 y += surf_h
             # Advance to next message if timer runs out
             if self.current_message[1] <= 0:
